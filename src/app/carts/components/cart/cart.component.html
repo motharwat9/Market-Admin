@@ -1,0 +1,79 @@
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document" style="max-width:900px!important">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Cart Details</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Image</th>
+                <th scope="col">Name</th>
+                <th scope="col">Price</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="" *ngFor="let product of products">
+                <td><img [src]="product.item.image" class="border rounded-circle" style="width:60px; height:60px" alt=""></td>
+                <td>{{product.item.title}}</td>
+                <td>{{product.item.price}}</td>
+                <td>{{product.quantity}}</td>
+                <td>{{product.item.price * product.quantity}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="table-responsive border-info border">
+  <div class="m-3">
+    <form class="row" [formGroup]="dateForm" (ngSubmit)="applyFilter()">
+        <div class="mb-3 col-md-3">
+          <label for="SDate" class="form-label">Start Date</label>
+          <input type="date" name="SDate" id="SDate" class="form-control" formControlName="start">
+        </div>
+        <div class="mb-3 col-md-3">
+          <label for="EDate" class="form-label">End Date</label>
+          <input type="date" name="EDate" id="EDate" class="form-control" formControlName="end">
+        </div>
+        <div class="mb-3 col-md-2 d-flex align-items-end justify-content-center">
+          <button type="submit" class="btn btn-outline-info">Apply</button>
+        </div>
+
+    </form>
+  </div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Date</th>
+        <th scope="col">Quantity</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+
+      </tr>
+    </thead>
+    <tbody>
+      <!-- <ng-container > -->
+        <tr *ngFor="let cart of Carts ; let isOdd=odd;let i=index">
+          <td [class.bg-info]="isOdd">{{cart.date |date : 'mediumDate'}}</td>
+          <td [class.bg-info]="isOdd">{{cart.products.length}}</td>
+          <td [class.bg-info]="isOdd"><button type="button" class="btn" [ngClass]="{'btn-outline-info':!isOdd,'btn-outline-light':isOdd}"
+          (click)="deleteCart(cart.id)">Delete</button></td>
+          <td [class.bg-info]="isOdd"><button type="button" class="btn" [ngClass]="{'btn-outline-info':!isOdd,'btn-outline-light':isOdd}" 
+            (click)="viewDetils(i)"  data-toggle="modal" data-target="#exampleModalLong">View</button></td>
+        </tr>
+    </tbody>
+
+  </table>
+</div>

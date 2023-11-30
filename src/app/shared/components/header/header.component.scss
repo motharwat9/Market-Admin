@@ -1,0 +1,14 @@
+nav {
+  background: linear-gradient(to right ,#92c3da,#062644);
+  color: white;
+  .content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0px;
+  }
+
+    li {
+      cursor: pointer;
+    }
+}
